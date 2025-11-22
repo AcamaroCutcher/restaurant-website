@@ -211,5 +211,5 @@ navBrand.addEventListener('click', (e) => {
 // ========================
 // Console Message
 // ========================
-console.log('%c🌮 Bienvenido a Casa Mexicana! 🌮', 'color: #d63031; font-size: 20px; font-weight: bold;');
+console.log('%c🌮 Bienvenido a Xochitl Rojo! 🌮', 'color: #d63031; font-size: 20px; font-weight: bold;');
 console.log('%cWebsite created with ❤️', 'color: #fdcb6e; font-size: 14px;');

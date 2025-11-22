@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Mexicana | Authentic Mexican Cuisine in Ecuador</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Casa Mexicana</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Inicio</a></li>
+                <li><a href="#about" class="nav-link">Nosotros</a></li>
+                <li><a href="#menu" class="nav-link">Menú</a></li>
+                <li><a href="#family" class="nav-link">Nuestra Familia</a></li>
+                <li><a href="#contact" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">Casa Mexicana</h1>
+            <p class="hero-subtitle fade-in-delay">Sabor Auténtico Mexicano en el Corazón de Ecuador</p>
+            <p class="hero-tagline fade-in-delay-2">Tradición Familiar · Cocina Artesanal · Amor en Cada Plato</p>
+            <a href="#menu" class="hero-btn fade-in-delay-3">Descubre Nuestro Menú</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra Historia</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">Bienvenidos a Casa Mexicana, donde las tradiciones culinarias mexicanas se encuentran con la calidez ecuatoriana.</p>
+                    <p>Somos un restaurante familiar que nació del amor por la auténtica comida mexicana y el deseo de compartir nuestras recetas tradicionales con Ecuador. Cada plato es preparado con ingredientes frescos y el mismo cariño que pondríamos en la mesa de nuestra propia familia.</p>
+                    <p>Desde nuestros tacos artesanales hasta nuestras enchiladas caseras, cada receta ha sido transmitida a través de generaciones, manteniendo viva la esencia de México en cada bocado.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">🌮</div>
+                            <h3>Recetas Auténticas</h3>
+                            <p>Secretos familiares transmitidos por generaciones</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                            <h3>Ambiente Familiar</h3>
+                            <p>Te recibimos como parte de nuestra familia</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🌶️</div>
+                            <h3>Ingredientes Frescos</h3>
+                            <p>Calidad premium en cada preparación</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu/Food Gallery Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestros Platillos</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Delicias auténticas preparadas con pasión</p>
+            </div>
+            <div class="food-gallery">
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);">
+                        <div class="placeholder-text">🌮<br>Tacos al Pastor</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Tacos al Pastor</h3>
+                        <p>Carne marinada con especias tradicionales, piña y cilantro fresco</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="placeholder-text">🫔<br>Enchiladas</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Enchiladas Verdes</h3>
+                        <p>Tortillas caseras bañadas en salsa verde con pollo y queso</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #ffc837 0%, #ff8008 100%);">
+                        <div class="placeholder-text">🌯<br>Burritos</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Burrito Mexicano</h3>
+                        <p>Tortilla de harina rellena de carne, frijoles, arroz y guacamole</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <div class="placeholder-text">🥙<br>Quesadillas</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Quesadillas Artesanales</h3>
+                        <p>Queso fundido en tortilla hecha a mano con tu relleno favorito</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);">
+                        <div class="placeholder-text">🍲<br>Pozole</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Pozole Rojo</h3>
+                        <p>Sopa tradicional con maíz cacahuazintle y especias secretas</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <div class="food-image-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="placeholder-text">🥑<br>Guacamole</div>
+                    </div>
+                    <div class="food-info">
+                        <h3>Guacamole Fresco</h3>
+                        <p>Aguacate machacado con tomate, cebolla, cilantro y limón</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Section -->
+    <section id="family" class="family">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra Familia</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">El corazón de Casa Mexicana</p>
+            </div>
+            <div class="family-content">
+                <div class="family-intro">
+                    <p>Somos más que un restaurante, somos una familia que comparte su pasión por la cocina mexicana. Cada miembro aporta su talento y dedicación para ofrecerte la mejor experiencia culinaria.</p>
+                </div>
+                <div class="family-grid">
+                    <div class="family-member">
+                        <div class="family-image-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="placeholder-text">👨‍🍳<br>Chef</div>
+                        </div>
+                        <h3>Chef José María</h3>
+                        <p class="family-role">Fundador & Chef Principal</p>
+                        <p>Con 25 años de experiencia, José trae las auténticas recetas de Oaxaca a Ecuador.</p>
+                    </div>
+                    <div class="family-member">
+                        <div class="family-image-placeholder" style="background: linear-gradient(135deg, #ffc837 0%, #ff8008 100%);">
+                            <div class="placeholder-text">👩<br>Co-fundadora</div>
+                        </div>
+                        <h3>María Elena</h3>
+                        <p class="family-role">Co-fundadora & Gerente</p>
+                        <p>El alma del restaurante, María asegura que cada cliente se sienta como en casa.</p>
+                    </div>
+                    <div class="family-member">
+                        <div class="family-image-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <div class="placeholder-text">👨<br>Chef Jr.</div>
+                        </div>
+                        <h3>Carlos</h3>
+                        <p class="family-role">Chef de Repostería</p>
+                        <p>Especialista en postres mexicanos tradicionales y churros artesanales.</p>
+                    </div>
+                    <div class="family-member">
+                        <div class="family-image-placeholder" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);">
+                            <div class="placeholder-text">👩<br>Manager</div>
+                        </div>
+                        <h3>Sofia</h3>
+                        <p class="family-role">Gestión de Eventos</p>
+                        <p>Coordina eventos especiales y celebraciones para hacer tus momentos inolvidables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Visítanos</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p>Quito, Ecuador</p>
+                            <p>Centro Histórico</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>Horario</h3>
+                            <p>Lunes - Viernes: 12:00 - 22:00</p>
+                            <p>Sábado - Domingo: 11:00 - 23:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Contacto</h3>
+                            <p>Teléfono: +593 XX XXX XXXX</p>
+                            <p>Email: info@casamexicana.ec</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🎉</div>
+                        <div>
+                            <h3>Reservaciones</h3>
+                            <p>Eventos especiales y grupos</p>
+                            <p>¡Contáctanos con anticipación!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <p>🗺️</p>
+                        <p>Mapa de Ubicación</p>
+                        <p class="map-note">Estamos ubicados en el corazón de Quito</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Casa Mexicana</h3>
+                    <p>Sabor auténtico mexicano en Ecuador</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">TikTok</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Casa Mexicana. Todos los derechos reservados. Hecho con ❤️ en Ecuador</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

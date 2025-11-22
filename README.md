@@ -1,6 +1,6 @@
-# 🌮 Xochitl Rojo - Restaurant Website
+# 🌮 Xochitl Roja - Restaurant Website
 
-A beautiful, modern, and responsive website for Xochitl Rojo, a family-owned Mexican restaurant in Ecuador.
+A beautiful, modern, and responsive website for Xochitl Roja, a family-owned Mexican restaurant in Ecuador.
 
 ## ✨ Features
 
@@ -53,7 +53,7 @@ npx serve
 
 ### Update Content
 
-1. **Restaurant Name**: Search for "Xochitl Rojo" in `index.html` and replace
+1. **Restaurant Name**: Search for "Xochitl Roja" in `index.html` and replace
 2. **Colors**: Modify CSS variables in `styles.css` (lines 2-12)
 3. **Add Real Images**: Replace the placeholder divs with actual `<img>` tags
 
@@ -115,4 +115,4 @@ For questions or support, please contact the restaurant directly.
 
 ---
 
-Made with ❤️ for Xochitl Rojo
+Made with ❤️ for Xochitl Roja

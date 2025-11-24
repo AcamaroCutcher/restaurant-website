@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Quest: The Uncertainty Principle Strikes Back!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a0033 0%, #000428 100%);
+            color: #fff;
+            overflow-x: hidden;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #00ff88;
+            font-style: italic;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+            }
+            to {
+                text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff;
+            }
+        }
+
+        .game-board {
+            background: #1a1a2e;
+            border: 4px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        #gameCanvas {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: #0f0f1e;
+            border: 2px solid #00ff88;
+            display: block;
+            margin: 0 auto;
+            cursor: crosshair;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .controls {
+            background: #1a1a2e;
+            border: 3px solid #ff00ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .controls h2 {
+            color: #ff00ff;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .quantum-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .quantum-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .quantum-button:active {
+            transform: scale(0.95);
+        }
+
+        .quantum-button.superposition {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .quantum-button.entangle {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .quantum-button.tunnel {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .info-section {
+            background: rgba(26, 26, 46, 0.8);
+            border: 3px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-section h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .knowledge-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .knowledge-card:hover {
+            border-color: #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .knowledge-title {
+            color: #00ffff;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .knowledge-title:hover {
+            color: #00ff88;
+        }
+
+        .expand-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .knowledge-brief {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .knowledge-detailed {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            color: #aaa;
+            line-height: 1.8;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            margin-top: 10px;
+        }
+
+        .knowledge-detailed.expanded {
+            max-height: 1000px;
+            padding-top: 10px;
+        }
+
+        .joke-box {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px dashed #ff00ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-style: italic;
+            color: #ff66ff;
+        }
+
+        .particle {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border: 3px solid #ffd700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .wave-function {
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .quantum-tip {
+            background: rgba(0, 255, 255, 0.1);
+            border-left: 4px solid #00ffff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>⚛️ QUANTUM QUEST ⚛️</h1>
+            <p class="subtitle">Where Schrödinger's Cat Goes on Vacation!</p>
+        </header>
+
+        <div class="game-board">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">🌊 Wave Functions</div>
+                    <div class="stat-value" id="waveCount">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">⚡ Quantum Energy</div>
+                    <div class="stat-value" id="energy">100</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">🎯 Particles Collected</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">🔬 Level</div>
+                    <div class="stat-value" id="level">1</div>
+                </div>
+            </div>
+
+            <div class="joke-box wave-function">
+                <span id="quantumJoke">Why don't quantum physicists ever win at hide and seek? Because you can observe them OR know where they are, but not both! 😄</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <h2>🎮 Quantum Controls</h2>
+            <p style="text-align: center; margin-bottom: 15px;">Use arrow keys to move your quantum particle! Try the special abilities below:</p>
+
+            <div class="button-group">
+                <button class="quantum-button" onclick="game.moveParticle('up')">↑ Up</button>
+                <button class="quantum-button" onclick="game.moveParticle('down')">↓ Down</button>
+                <button class="quantum-button" onclick="game.moveParticle('left')">← Left</button>
+                <button class="quantum-button" onclick="game.moveParticle('right')">→ Right</button>
+            </div>
+
+            <div class="button-group">
+                <button class="quantum-button superposition" onclick="game.activateSuperposition()">
+                    🌀 SUPERPOSITION
+                </button>
+                <button class="quantum-button entangle" onclick="game.activateEntanglement()">
+                    🔗 ENTANGLE
+                </button>
+                <button class="quantum-button tunnel" onclick="game.activateTunneling()">
+                    🌈 TUNNEL
+                </button>
+                <button class="quantum-button" onclick="game.spawnObstacle()">
+                    🎲 SPAWN OBSTACLE
+                </button>
+            </div>
+
+            <div class="quantum-tip">
+                💡 <strong>Current Objective:</strong> <span id="objective">Collect quantum particles and avoid collapsing your wave function!</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>📚 Quantum Knowledge Base</h2>
+            <p style="margin-bottom: 20px;">Click on any topic to learn more about the fascinating world of quantum mechanics!</p>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('wave-particle')">
+                    <span>🌊 Wave-Particle Duality</span>
+                    <span class="expand-icon" id="icon-wave-particle">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    Matter and light exhibit both wave and particle properties. Your quantum character in the game demonstrates this by existing as both a wave and a particle!
+                </div>
+                <div class="knowledge-detailed" id="detail-wave-particle">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>The wave-particle duality is one of the most mind-bending concepts in quantum mechanics. It was first demonstrated by Louis de Broglie in 1924, who proposed that all matter has wave properties.</p>
+
+                    <p><strong>Key Experiments:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Double-Slit Experiment:</strong> When electrons pass through two slits, they create an interference pattern (wave behavior), but when observed, they behave like particles.</li>
+                        <li><strong>Photoelectric Effect:</strong> Light knocks electrons off metal surfaces, but only if the frequency is high enough—proving light comes in particle-like packets (photons).</li>
+                    </ul>
+
+                    <p><strong>Mathematical Foundation:</strong></p>
+                    <p>The de Broglie wavelength: λ = h/p, where h is Planck's constant and p is momentum. This means everything has a wavelength, even you! (Though it's incredibly tiny for macroscopic objects.)</p>
+
+                    <p><strong>Why It Matters:</strong></p>
+                    <p>This duality underlies all of quantum mechanics and is essential for technologies like electron microscopes, quantum computers, and our understanding of atomic structure.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('superposition')">
+                    <span>🌀 Quantum Superposition</span>
+                    <span class="expand-icon" id="icon-superposition">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    A quantum system can exist in multiple states simultaneously until observed. In the game, activate superposition to be in multiple places at once!
+                </div>
+                <div class="knowledge-detailed" id="detail-superposition">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>Superposition is the principle that quantum systems can exist in multiple states at the same time, described by a linear combination of basis states.</p>
+
+                    <p><strong>Mathematical Representation:</strong></p>
+                    <p>A quantum state |ψ⟩ can be written as: |ψ⟩ = α|0⟩ + β|1⟩, where α and β are complex probability amplitudes, and |α|² + |β|² = 1.</p>
+
+                    <p><strong>Schrödinger's Cat:</strong></p>
+                    <p>The famous thought experiment: A cat in a box is both alive AND dead until you open the box (make an observation). This illustrates the bizarre nature of superposition at macroscopic scales—though in reality, quantum effects "decohere" quickly in large systems.</p>
+
+                    <p><strong>Real Applications:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Quantum Computing:</strong> Qubits can be 0 and 1 simultaneously, allowing parallel computation</li>
+                        <li><strong>Quantum Cryptography:</strong> Secure communication based on quantum state superpositions</li>
+                        <li><strong>Atomic Clocks:</strong> Use superposition of atomic energy states for unprecedented precision</li>
+                    </ul>
+
+                    <p><strong>Measurement Collapse:</strong></p>
+                    <p>When you measure a superposition, it "collapses" to one definite state. The probability of each outcome is given by |α|² and |β|². This collapse is instantaneous and irreversible!</p>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('entanglement')">
+                    <span>🔗 Quantum Entanglement</span>
+                    <span class="expand-icon" id="icon-entanglement">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    Particles can become "entangled," meaning the state of one instantly affects the other, no matter how far apart they are. Einstein called it "spooky action at a distance"!
+                </div>
+                <div class="knowledge-detailed" id="detail-entanglement">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>Quantum entanglement is a phenomenon where quantum states of two or more particles become correlated in such a way that the quantum state of each particle cannot be described independently.</p>
+
+                    <p><strong>The EPR Paradox:</strong></p>
+                    <p>In 1935, Einstein, Podolsky, and Rosen proposed a thought experiment suggesting quantum mechanics was incomplete. They couldn't accept that measuring one particle could instantaneously affect another light-years away!</p>
+
+                    <p><strong>Bell's Theorem:</strong></p>
+                    <p>John Bell proved in 1964 that no local hidden variable theory could reproduce all predictions of quantum mechanics. Experiments have confirmed quantum mechanics is correct—entanglement is real!</p>
+
+                    <p><strong>How It Works:</strong></p>
+                    <p>When two particles are entangled, they share a combined quantum state. If you measure particle A and find it has spin-up, particle B will instantly have spin-down, even if they're on opposite sides of the universe!</p>
+
+                    <p><strong>Important Note:</strong></p>
+                    <p>Entanglement doesn't allow faster-than-light communication (sorry, no quantum phones!). You can't control what result you get when measuring, so no information is transmitted.</p>
+
+                    <p><strong>Applications:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Quantum Teleportation:</strong> Transfer quantum states using entanglement and classical communication</li>
+                        <li><strong>Quantum Networks:</strong> Future "quantum internet" will use entangled particles</li>
+                        <li><strong>Quantum Sensing:</strong> Entangled particles enable ultra-precise measurements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('uncertainty')">
+                    <span>❓ Heisenberg Uncertainty Principle</span>
+                    <span class="expand-icon" id="icon-uncertainty">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    You cannot simultaneously know both the exact position and exact momentum of a particle. The more precisely you know one, the less precisely you know the other!
+                </div>
+                <div class="knowledge-detailed" id="detail-uncertainty">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>The Heisenberg Uncertainty Principle is not about measurement limitations or our technology—it's a fundamental property of nature itself!</p>
+
+                    <p><strong>Mathematical Formula:</strong></p>
+                    <p>Δx · Δp ≥ ℏ/2, where Δx is the uncertainty in position, Δp is the uncertainty in momentum, and ℏ (h-bar) is the reduced Planck's constant (≈ 1.054 × 10⁻³⁴ J·s).</p>
+
+                    <p><strong>Other Uncertainty Relations:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Energy-Time:</strong> ΔE · Δt ≥ ℏ/2 (You can borrow energy from the vacuum, but only briefly!)</li>
+                        <li><strong>Angular Momentum:</strong> Different components of angular momentum can't be simultaneously known exactly</li>
+                    </ul>
+
+                    <p><strong>Why It Happens:</strong></p>
+                    <p>The uncertainty principle arises from the wave nature of matter. A particle with a definite momentum is represented by a wave extending infinitely (no defined position). A particle with a definite position requires a localized wave packet made of many different momentum components.</p>
+
+                    <p><strong>Common Misconception:</strong></p>
+                    <p>It's NOT about disturbing the particle when we measure it (observer effect). The uncertainty exists even before measurement—particles simply don't HAVE definite values for position and momentum simultaneously!</p>
+
+                    <p><strong>Real-World Implications:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Atomic Stability:</strong> Electrons can't fall into the nucleus because that would violate uncertainty (too precise position → huge momentum)</li>
+                        <li><strong>Quantum Tunneling:</strong> The energy-time uncertainty allows particles to "borrow" energy to overcome barriers</li>
+                        <li><strong>Zero-Point Energy:</strong> Even at absolute zero, particles still have energy due to uncertainty</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('tunneling')">
+                    <span>🌈 Quantum Tunneling</span>
+                    <span class="expand-icon" id="icon-tunneling">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    Particles can pass through energy barriers they classically shouldn't be able to cross. It's like walking through walls, but quantum style!
+                </div>
+                <div class="knowledge-detailed" id="detail-tunneling">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>Quantum tunneling is a phenomenon where particles pass through potential energy barriers that would be impossible to overcome classically.</p>
+
+                    <p><strong>How It Works:</strong></p>
+                    <p>In quantum mechanics, particles are described by wave functions that can extend into classically forbidden regions. There's a non-zero probability of finding the particle on the other side of a barrier!</p>
+
+                    <p><strong>Mathematical Description:</strong></p>
+                    <p>The tunneling probability depends on the barrier width and height. For a rectangular barrier: T ≈ e^(-2κL), where κ depends on the particle's energy and the barrier height, and L is the barrier width.</p>
+
+                    <p><strong>Real-World Examples:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Nuclear Fusion in Stars:</strong> Hydrogen nuclei tunnel through the electromagnetic repulsion barrier to fuse. Without tunneling, our Sun wouldn't shine!</li>
+                        <li><strong>Radioactive Decay:</strong> Alpha particles tunnel out of atomic nuclei. This is why radioactivity is probabilistic—we can't predict exactly when an atom will decay.</li>
+                        <li><strong>Scanning Tunneling Microscope (STM):</strong> Uses tunneling current between a sharp tip and a surface to create atomic-resolution images. Won the Nobel Prize in 1986!</li>
+                        <li><strong>Flash Memory:</strong> Your USB drives and SSDs use tunneling to store data by trapping electrons on floating gates</li>
+                        <li><strong>Enzyme Catalysis:</strong> Some biological reactions are enhanced by quantum tunneling of protons</li>
+                    </ul>
+
+                    <p><strong>Tunneling Time:</strong></p>
+                    <p>How long does tunneling take? This is still debated! Recent experiments suggest it might be instantaneous, or at least faster than light would cross the same distance—but no information is transmitted faster than light, so relativity is safe.</p>
+
+                    <p><strong>Macroscopic Tunneling:</strong></p>
+                    <p>Could YOU tunnel through a wall? Technically the probability is non-zero... but it's so astronomically small (like 10^(-10^30)) that it would never happen in the lifetime of the universe. Quantum weirdness mostly stays small!</p>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('decoherence')">
+                    <span>🌀 Quantum Decoherence</span>
+                    <span class="expand-icon" id="icon-decoherence">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    How quantum systems lose their quantum properties when interacting with the environment. This is why we don't see cats in superposition of alive and dead!
+                </div>
+                <div class="knowledge-detailed" id="detail-decoherence">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>Decoherence explains the transition from quantum to classical behavior. It's the process by which quantum superpositions are destroyed through interaction with the environment.</p>
+
+                    <p><strong>The Measurement Problem:</strong></p>
+                    <p>Why do we only see definite outcomes when we measure? Decoherence provides a partial answer: the environment acts as a continuous "observer," rapidly destroying quantum coherence.</p>
+
+                    <p><strong>How Fast Does It Happen?</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Isolated atoms:</strong> Microseconds to milliseconds</li>
+                        <li><strong>Molecules in air:</strong> Picoseconds (10^-12 seconds)</li>
+                        <li><strong>Macroscopic objects:</strong> Essentially instantaneous (10^-40 seconds for a dust particle)</li>
+                    </ul>
+
+                    <p><strong>The Mechanism:</strong></p>
+                    <p>When a quantum system interacts with many degrees of freedom in the environment (air molecules, photons, thermal radiation), quantum information spreads into the environment. The system becomes "entangled" with countless environmental particles, making it impossible to maintain coherent superpositions.</p>
+
+                    <p><strong>Why Quantum Computers Are Hard:</strong></p>
+                    <p>Building quantum computers is challenging precisely because of decoherence. We need to isolate qubits from the environment (extreme cold, vacuum, electromagnetic shielding) while still being able to control them. It's like juggling soap bubbles in a hurricane!</p>
+
+                    <p><strong>Decoherence vs. Collapse:</strong></p>
+                    <p>Decoherence explains why we don't see macroscopic superpositions, but it doesn't fully solve the measurement problem. It explains the appearance of collapse but doesn't say which outcome occurs. This is still an open question in quantum foundations!</p>
+
+                    <p><strong>Philosophical Implications:</strong></p>
+                    <p>Decoherence supports the "many worlds" interpretation—perhaps all outcomes occur, but decoherence makes different branches of the wave function unable to interfere, creating the appearance of a single classical world.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <div class="knowledge-title" onclick="toggleKnowledge('quantum-computing')">
+                    <span>💻 Quantum Computing</span>
+                    <span class="expand-icon" id="icon-quantum-computing">▼</span>
+                </div>
+                <div class="knowledge-brief">
+                    Harnessing quantum superposition and entanglement to perform computations impossible for classical computers!
+                </div>
+                <div class="knowledge-detailed" id="detail-quantum-computing">
+                    <p><strong>Deep Dive:</strong></p>
+                    <p>Quantum computers use qubits instead of classical bits. While a classical bit is either 0 or 1, a qubit can be in a superposition of both states simultaneously!</p>
+
+                    <p><strong>Quantum Advantage:</strong></p>
+                    <p>With n qubits in superposition, you can represent 2^n states simultaneously. 300 qubits can represent more states than there are atoms in the observable universe!</p>
+
+                    <p><strong>Key Algorithms:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Shor's Algorithm:</strong> Factors large numbers exponentially faster than best known classical algorithms. This threatens current encryption (RSA)!</li>
+                        <li><strong>Grover's Algorithm:</strong> Searches unsorted databases with quadratic speedup (√N instead of N operations)</li>
+                        <li><strong>Quantum Simulation:</strong> Simulate quantum systems efficiently—impossible classically for large systems</li>
+                        <li><strong>Quantum Machine Learning:</strong> Potential speedups for certain ML tasks</li>
+                    </ul>
+
+                    <p><strong>Types of Quantum Computers:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Superconducting Qubits:</strong> Used by IBM, Google—requires temperatures near absolute zero (15 millikelvin)</li>
+                        <li><strong>Trapped Ions:</strong> Individual atoms held by electromagnetic fields (IonQ, Honeywell)</li>
+                        <li><strong>Photonic:</strong> Uses photons as qubits (Xanadu, PsiQuantum)</li>
+                        <li><strong>Topological:</strong> More resistant to errors (Microsoft's approach—still theoretical)</li>
+                    </ul>
+
+                    <p><strong>Challenges:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Decoherence:</strong> Qubits are extremely fragile</li>
+                        <li><strong>Error Rates:</strong> Current systems have ~0.1-1% error per operation. Need < 0.01% for practical algorithms</li>
+                        <li><strong>Scaling:</strong> Need thousands to millions of qubits for useful applications. Currently we have hundreds</li>
+                        <li><strong>Error Correction:</strong> Requires many physical qubits per logical qubit (overhead of 100-1000x)</li>
+                    </ul>
+
+                    <p><strong>Current State (2025):</strong></p>
+                    <p>We're in the "NISQ era" (Noisy Intermediate-Scale Quantum). Systems have 50-1000 qubits but are too noisy for full error correction. Researchers are exploring what useful computations can be done despite the noise.</p>
+
+                    <p><strong>When Will They Be Practical?</strong></p>
+                    <p>Predictions vary wildly from 5 to 30+ years for fault-tolerant quantum computers. But quantum advantage for specific tasks (like quantum simulation or optimization) might come sooner!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>🎯 How to Play</h2>
+            <div style="line-height: 2;">
+                <p>🎮 <strong>Movement:</strong> Use arrow keys or the directional buttons to move your quantum particle around the game board.</p>
+                <p>⚡ <strong>Collect Energy:</strong> Gather the glowing quantum particles to increase your score and energy.</p>
+                <p>🌀 <strong>Superposition:</strong> Exist in multiple places at once! Creates temporary duplicates that also collect particles.</p>
+                <p>🔗 <strong>Entanglement:</strong> Entangle with nearby particles to gain bonus points!</p>
+                <p>🌈 <strong>Tunneling:</strong> Phase through obstacles like a true quantum particle!</p>
+                <p>⚠️ <strong>Avoid Collapse:</strong> Don't let your wave function collapse completely (energy reaches 0) or the game ends!</p>
+                <p>📈 <strong>Level Up:</strong> As you collect more particles, you'll unlock new quantum phenomena and abilities!</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ and ⚛️ | Remember: In quantum mechanics, the universe doesn't ask for permission—it just superpositions!</p>
+            <p style="margin-top: 10px;">🐱 Schrödinger's Cat Status: <span id="catStatus">Unknown (until observed)</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Quantum Game Engine
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const jokes = [
+            "Why don't quantum physicists ever win at hide and seek? Because you can observe them OR know where they are, but not both! 😄",
+            "Heisenberg was pulled over. Officer: 'Do you know how fast you were going?' Heisenberg: 'No, but I know exactly where I am!' 🚗",
+            "Schrödinger's cat walks into a bar. And doesn't. 🐱",
+            "What's a quantum physicist's favorite food? Fission chips! 🍟",
+            "Why did the quantum chicken cross the road? To prove it was in a superposition of crossing and not crossing! 🐔",
+            "I told a chemistry joke, but there was no reaction. Then I told a quantum joke—it was both funny and not funny! 🤣",
+            "Why are quantum physicists bad at relationships? They're always uncertain! 💔",
+            "What do you call a quantum particle that's always late? A tardy-on! ⏰",
+            "Why don't photons have luggage? Because they travel light! 💼",
+            "Quantum mechanics: because regular mechanics just wasn't confusing enough! 🤯"
+        ];
+
+        let jokeIndex = 0;
+        setInterval(() => {
+            jokeIndex = (jokeIndex + 1) % jokes.length;
+            document.getElementById('quantumJoke').textContent = jokes[jokeIndex];
+        }, 8000);
+
+        class QuantumGame {
+            constructor() {
+                this.player = {
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    size: 16,
+                    color: '#00ffff',
+                    vx: 0,
+                    vy: 0,
+                    inSuperposition: false,
+                    canTunnel: false,
+                    superpositionClones: []
+                };
+
+                this.particles = [];
+                this.obstacles = [];
+                this.effects = [];
+                this.score = 0;
+                this.energy = 100;
+                this.level = 1;
+                this.waveCount = 0;
+
+                this.keys = {};
+                this.lastSpawn = Date.now();
+                this.lastEnergyDrain = Date.now();
+
+                this.setupControls();
+                this.spawnParticles(5);
+                this.gameLoop();
+
+                // Update Schrödinger's cat status randomly
+                setInterval(() => {
+                    const statuses = [
+                        'Superposition of alive and dead',
+                        'Currently alive (we think)',
+                        'Sleeping (definitely alive)',
+                        'Quantum zoomies in progress',
+                        'Entangled with your heart ❤️',
+                        'Wave function uncollapsed',
+                        'In another dimension',
+                        'Both here and not here'
+                    ];
+                    document.getElementById('catStatus').textContent =
+                        statuses[Math.floor(Math.random() * statuses.length)];
+                }, 5000);
+            }
+
+            setupControls() {
+                document.addEventListener('keydown', (e) => {
+                    this.keys[e.key] = true;
+
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        this.activateSuperposition();
+                    }
+                    if (e.key === 'e' || e.key === 'E') {
+                        this.activateEntanglement();
+                    }
+                    if (e.key === 't' || e.key === 'T') {
+                        this.activateTunneling();
+                    }
+                });
+
+                document.addEventListener('keyup', (e) => {
+                    this.keys[e.key] = false;
+                });
+
+                canvas.addEventListener('click', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+                    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+                    this.spawnEffect(x, y, '✨');
+                    this.score += 1;
+                    this.updateStats();
+                });
+            }
+
+            moveParticle(direction) {
+                const speed = 15;
+                switch(direction) {
+                    case 'up':
+                        this.player.vy = -speed;
+                        this.player.vx = 0;
+                        break;
+                    case 'down':
+                        this.player.vy = speed;
+                        this.player.vx = 0;
+                        break;
+                    case 'left':
+                        this.player.vx = -speed;
+                        this.player.vy = 0;
+                        break;
+                    case 'right':
+                        this.player.vx = speed;
+                        this.player.vy = 0;
+                        break;
+                }
+            }
+
+            activateSuperposition() {
+                if (this.energy < 20) {
+                    this.showMessage('Not enough quantum energy!', '#ff0000');
+                    return;
+                }
+
+                this.energy -= 20;
+                this.player.inSuperposition = true;
+                this.waveCount++;
+
+                // Create superposition clones
+                for (let i = 0; i < 3; i++) {
+                    const angle = (Math.PI * 2 / 3) * i;
+                    this.player.superpositionClones.push({
+                        x: this.player.x + Math.cos(angle) * 50,
+                        y: this.player.y + Math.sin(angle) * 50,
+                        alpha: 0.5
+                    });
+                }
+
+                this.showMessage('SUPERPOSITION ACTIVATED! 🌀', '#ff00ff');
+
+                setTimeout(() => {
+                    this.player.inSuperposition = false;
+                    this.player.superpositionClones = [];
+                }, 3000);
+
+                this.updateStats();
+            }
+
+            activateEntanglement() {
+                if (this.energy < 15) {
+                    this.showMessage('Not enough quantum energy!', '#ff0000');
+                    return;
+                }
+
+                this.energy -= 15;
+                let entangled = 0;
+
+                // Entangle with nearby particles
+                this.particles.forEach((particle, index) => {
+                    const dx = particle.x - this.player.x;
+                    const dy = particle.y - this.player.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        // Draw entanglement line
+                        this.effects.push({
+                            type: 'line',
+                            x1: this.player.x,
+                            y1: this.player.y,
+                            x2: particle.x,
+                            y2: particle.y,
+                            duration: 60
+                        });
+
+                        this.score += 5;
+                        entangled++;
+                        this.particles.splice(index, 1);
+                    }
+                });
+
+                if (entangled > 0) {
+                    this.showMessage(`ENTANGLED ${entangled} PARTICLES! 🔗`, '#00ffff');
+                } else {
+                    this.showMessage('No particles in range!', '#ffaa00');
+                }
+
+                this.updateStats();
+            }
+
+            activateTunneling() {
+                if (this.energy < 25) {
+                    this.showMessage('Not enough quantum energy!', '#ff0000');
+                    return;
+                }
+
+                this.energy -= 25;
+                this.player.canTunnel = true;
+                this.showMessage('QUANTUM TUNNELING ACTIVE! 🌈', '#00ff88');
+
+                setTimeout(() => {
+                    this.player.canTunnel = false;
+                }, 2000);
+
+                this.updateStats();
+            }
+
+            spawnParticles(count) {
+                for (let i = 0; i < count; i++) {
+                    this.particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: 8,
+                        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                        wave: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            spawnObstacle() {
+                this.obstacles.push({
+                    x: Math.random() * (canvas.width - 40),
+                    y: Math.random() * (canvas.height - 40),
+                    width: 40,
+                    height: 40,
+                    color: '#ff0066'
+                });
+
+                this.showMessage('Obstacle spawned! ⚠️', '#ff0066');
+            }
+
+            spawnEffect(x, y, symbol) {
+                this.effects.push({
+                    type: 'text',
+                    x: x,
+                    y: y,
+                    text: symbol,
+                    vy: -2,
+                    duration: 30,
+                    alpha: 1
+                });
+            }
+
+            showMessage(text, color) {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = text;
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.9);
+                    color: ${color};
+                    padding: 20px 40px;
+                    border-radius: 10px;
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    z-index: 1000;
+                    border: 3px solid ${color};
+                    animation: fadeInOut 2s ease-out;
+                `;
+
+                document.body.appendChild(messageDiv);
+
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 2000);
+            }
+
+            updateStats() {
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('energy').textContent = Math.max(0, Math.floor(this.energy));
+                document.getElementById('level').textContent = this.level;
+                document.getElementById('waveCount').textContent = this.waveCount;
+            }
+
+            update() {
+                // Handle keyboard movement
+                const speed = 5;
+                if (this.keys['ArrowUp']) this.player.vy = -speed;
+                else if (this.keys['ArrowDown']) this.player.vy = speed;
+                else this.player.vy *= 0.9;
+
+                if (this.keys['ArrowLeft']) this.player.vx = -speed;
+                else if (this.keys['ArrowRight']) this.player.vx = speed;
+                else this.player.vx *= 0.9;
+
+                // Update player position
+                this.player.x += this.player.vx;
+                this.player.y += this.player.vy;
+
+                // Wrap around screen
+                if (this.player.x < 0) this.player.x = canvas.width;
+                if (this.player.x > canvas.width) this.player.x = 0;
+                if (this.player.y < 0) this.player.y = canvas.height;
+                if (this.player.y > canvas.height) this.player.y = 0;
+
+                // Check particle collision
+                this.particles = this.particles.filter(particle => {
+                    particle.wave += 0.1;
+
+                    const dx = particle.x - this.player.x;
+                    const dy = particle.y - this.player.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < this.player.size + particle.size) {
+                        this.score += 10;
+                        this.energy = Math.min(100, this.energy + 5);
+                        this.spawnEffect(particle.x, particle.y, '+10');
+                        this.updateStats();
+                        return false;
+                    }
+
+                    // Also check superposition clones
+                    if (this.player.inSuperposition) {
+                        for (let clone of this.player.superpositionClones) {
+                            const cdx = particle.x - clone.x;
+                            const cdy = particle.y - clone.y;
+                            const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+                            if (cdist < this.player.size + particle.size) {
+                                this.score += 10;
+                                this.energy = Math.min(100, this.energy + 5);
+                                this.spawnEffect(particle.x, particle.y, '+10');
+                                this.updateStats();
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                });
+
+                // Check obstacle collision (unless tunneling)
+                if (!this.player.canTunnel) {
+                    for (let obstacle of this.obstacles) {
+                        if (this.player.x > obstacle.x &&
+                            this.player.x < obstacle.x + obstacle.width &&
+                            this.player.y > obstacle.y &&
+                            this.player.y < obstacle.y + obstacle.height) {
+                            this.energy -= 0.5;
+                            this.player.vx *= -0.5;
+                            this.player.vy *= -0.5;
+                        }
+                    }
+                }
+
+                // Update effects
+                this.effects = this.effects.filter(effect => {
+                    effect.duration--;
+                    if (effect.type === 'text') {
+                        effect.y += effect.vy;
+                        effect.alpha = effect.duration / 30;
+                    }
+                    return effect.duration > 0;
+                });
+
+                // Spawn new particles
+                if (Date.now() - this.lastSpawn > 3000 && this.particles.length < 10) {
+                    this.spawnParticles(2);
+                    this.lastSpawn = Date.now();
+                }
+
+                // Drain energy slowly
+                if (Date.now() - this.lastEnergyDrain > 1000) {
+                    this.energy -= 0.5;
+                    this.lastEnergyDrain = Date.now();
+                    this.updateStats();
+                }
+
+                // Level up
+                if (this.score >= this.level * 100) {
+                    this.level++;
+                    this.energy = 100;
+                    this.showMessage(`LEVEL ${this.level}! 🎉`, '#ffd700');
+                    this.spawnParticles(3);
+                    this.updateStats();
+                }
+
+                // Game over
+                if (this.energy <= 0) {
+                    this.showMessage('WAVE FUNCTION COLLAPSED! 💥', '#ff0000');
+                    this.energy = 100;
+                    this.score = 0;
+                    this.level = 1;
+                    this.particles = [];
+                    this.obstacles = [];
+                    this.spawnParticles(5);
+                    this.updateStats();
+                }
+            }
+
+            draw() {
+                // Clear canvas with fade effect
+                ctx.fillStyle = 'rgba(15, 15, 30, 0.3)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Draw grid (quantum field visualization)
+                ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < canvas.width; x += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < canvas.height; y += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+                }
+
+                // Draw particles
+                this.particles.forEach(particle => {
+                    const waveOffset = Math.sin(particle.wave) * 3;
+
+                    // Glow effect
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = particle.color;
+
+                    ctx.fillStyle = particle.color;
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y + waveOffset, particle.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Draw wave function
+                    ctx.strokeStyle = particle.color;
+                    ctx.globalAlpha = 0.3;
+                    ctx.beginPath();
+                    for (let i = -20; i <= 20; i += 2) {
+                        const x = particle.x + i;
+                        const y = particle.y + Math.sin(particle.wave + i * 0.2) * 10;
+                        if (i === -20) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                    ctx.shadowBlur = 0;
+                });
+
+                // Draw obstacles
+                this.obstacles.forEach(obstacle => {
+                    if (this.player.canTunnel) {
+                        ctx.globalAlpha = 0.3;
+                        ctx.fillStyle = '#666666';
+                    } else {
+                        ctx.fillStyle = obstacle.color;
+                    }
+
+                    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                    ctx.globalAlpha = 1;
+                });
+
+                // Draw superposition clones
+                if (this.player.inSuperposition) {
+                    this.player.superpositionClones.forEach(clone => {
+                        ctx.globalAlpha = clone.alpha;
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = '#ff00ff';
+
+                        // Draw pixel art style player
+                        ctx.fillStyle = '#ff00ff';
+                        this.drawPixelPlayer(clone.x, clone.y);
+
+                        ctx.shadowBlur = 0;
+                        ctx.globalAlpha = 1;
+                    });
+                }
+
+                // Draw player
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.player.color;
+
+                if (this.player.canTunnel) {
+                    ctx.globalAlpha = 0.6;
+                    ctx.shadowColor = '#00ff88';
+                }
+
+                ctx.fillStyle = this.player.color;
+                this.drawPixelPlayer(this.player.x, this.player.y);
+
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1;
+
+                // Draw effects
+                this.effects.forEach(effect => {
+                    if (effect.type === 'text') {
+                        ctx.globalAlpha = effect.alpha;
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = '20px "Courier New"';
+                        ctx.fillText(effect.text, effect.x, effect.y);
+                        ctx.globalAlpha = 1;
+                    } else if (effect.type === 'line') {
+                        ctx.strokeStyle = '#00ffff';
+                        ctx.lineWidth = 2;
+                        ctx.globalAlpha = effect.duration / 60;
+                        ctx.beginPath();
+                        ctx.moveTo(effect.x1, effect.y1);
+                        ctx.lineTo(effect.x2, effect.y2);
+                        ctx.stroke();
+                        ctx.globalAlpha = 1;
+                    }
+                });
+            }
+
+            drawPixelPlayer(x, y) {
+                const size = 4;
+                const pixels = [
+                    [0,0,1,1,1,1,0,0],
+                    [0,1,1,1,1,1,1,0],
+                    [1,1,0,1,1,0,1,1],
+                    [1,1,1,1,1,1,1,1],
+                    [0,1,1,1,1,1,1,0],
+                    [0,1,1,0,0,1,1,0],
+                    [0,1,1,0,0,1,1,0],
+                ];
+
+                pixels.forEach((row, i) => {
+                    row.forEach((pixel, j) => {
+                        if (pixel) {
+                            ctx.fillRect(
+                                x - (row.length * size / 2) + j * size,
+                                y - (pixels.length * size / 2) + i * size,
+                                size,
+                                size
+                            );
+                        }
+                    });
+                });
+            }
+
+            gameLoop() {
+                this.update();
+                this.draw();
+                requestAnimationFrame(() => this.gameLoop());
+            }
+        }
+
+        // Toggle knowledge sections
+        function toggleKnowledge(id) {
+            const detail = document.getElementById(`detail-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+
+            detail.classList.toggle('expanded');
+            icon.classList.toggle('expanded');
+        }
+
+        // Initialize game
+        const game = new QuantumGame();
+
+        // Add CSS animation for fadeInOut
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
